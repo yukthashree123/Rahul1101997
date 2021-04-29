@@ -1,37 +1,35 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect ,useContext} from 'react';
 import { Link } from 'react-router-dom';
-import Location from '../Location/Location';
+import HomeCard from '../HomeCard/HomeCard';
 export default function Home() {
-
+   // const [data, setData] = useState([]);
     const [data, setData] = useState([]);
-    const [url, seturl] = useState('');
-    useEffect(async() => {
+    const [latitude, setlatitude] = useState('');
+    const [longitude, setlongitude] = useState('');
 
-      await  fetch(url, {
+
+    useEffect(() => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+          } 
+          fetch(`https://developers.zomato.com/api/v2.1/geocode?lat=23.1532274&lon=79.9026804`,{
             "method": "GET",
             headers: {
                'user-key':'7749b19667964b87a3efc739e254ada2'
             }
         })
-        .then(res=>res.json())
-        .then(data => {
-           // console.log(data.nearby_restaurants);
-            console.log(data.nearby_restaurants[0].restaurant.featured_image);
-            console.log(data.nearby_restaurants[0].restaurant.name);
-            console.log(data.nearby_restaurants[0].restaurant.location.address);
-            console.log(data.nearby_restaurants[0].restaurant.location.zipcode);
-            console.log(data.nearby_restaurants[0].restaurant.cuisines);
-        })
-        .catch(err => {
-            console.error(err);
-        });
-    });
+          .then(res=>res.json())
+          .then(data=>{console.log(data.nearby_restaurants);
+              setData(data.nearby_restaurants);
+          });  
+    },[]);
 
-    function geturl(urldata)
-    {
-        seturl(urldata);
-    }
+    function showPosition(position) {
+        setlatitude(position.coords.latitude); 
+        setlongitude(position.coords.longitude);  
+      }
 
+      //console.log(data[4].restaurant.name);
     return (
         <div data-testid="containertest" className="container mt-2" style={{minHeight:"700px"}}>
 
@@ -44,9 +42,8 @@ export default function Home() {
                 <Link to="/logout" id="logoutBtn" className="text-danger">Logout <i className="fas fa-sign-out-alt"></i></Link>
             </div>
         </div>
-        <Location geturl={geturl}/>
-        <div data-testid="carddiv" className="row">
-        </div>
+        
+            {<HomeCard resData={data}/>}
     </div>
     )
 }

@@ -1,36 +1,45 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react';
+import '../Login/Login.css';
+import {Link} from 'react-router-dom';
+export default function Register() {
 
-import './Login.css';
-import authentication from '../Service/authentication';
-import {Link,useHistory} from 'react-router-dom';
-export default function Login() {
+    const [firstname, setfirstname] = useState('');
+    const [lastname, setlastname] = useState('');
+    const [age, setage] = useState('');
+    const [city, setcity] = useState('');
+    const [email, setemail] = useState('');
+    const [password, setpassword] = useState('');
 
-  let history=useHistory();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+    console.log(firstname+lastname+city+age+email+password)
 
- async function Login() {
-   const res = await fetch('http://localhost:9000/auth/login', {
-         method: 'POST',
-         headers: {
-             'Content-Type': 'application/json'
-         },
-         body: JSON.stringify({ email, password })
-     });
-     const data = await res.json();
-     console.log(data);
-     
-     if(data.status===401)
-     {
-       alert(data.message);
-     }
-     localStorage.setItem('token', data.access_token);
-     await authentication.Login();
-    history.push('/');
-  }
-
+    function registerUser() {
+        fetch(`http://localhost:9000/auth/register`,{
+        method:'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ 
+            firstname:firstname, 
+            lastname:lastname,
+           city:city,
+           age:age,
+           email:email,
+           password:password
+         })  
+    })
+   .then(res=>res.json())
+   .then(data=>{
+       if(data.status===200)
+       {
+           alert(data.message);
+       }else if(data.status===409)
+       {
+        alert(data.message);
+       }
+   })   
+    }
     return (
-      <div class="container d-flex justify-content-center align-items-center">
+        <div class="container d-flex justify-content-center align-items-center">
       <div class="card">
           <div class="row">
               <div class="col-md-6 formColor " >
@@ -38,18 +47,36 @@ export default function Login() {
          
        <div className="loginbox">
        {/* <i class="fas avathar fa-user-circle fa-3x"></i> */}
-           <h2 class="text-center text-dark mt-5 p-2">Login</h2>
+           <h2 class="text-center text-dark mt-5 p-2">Register</h2>
          <div className="txtbox">
              <form>
                    <div className="text-center mt-3">
                            <i  className="fas  fa-user p-1"></i>
-                           <input type="text" placeholder="username" onChange={(e) => setEmail(e.target.value)}/>
+                           <input type="text" placeholder="firstname" onChange={(e) => setfirstname(e.target.value)} />
                    </div><br/>
                    <div className="text-center">
                            <i className="fas fa-key p-1"></i>
-                           <input type="password" placeholder="password" onChange={(e) => setPassword(e.target.value)}/>
+                           <input type="text" placeholder="lastname" onChange={(e) => setlastname(e.target.value)} />
                    </div><br/>
-                   <div className="text-center"><button type="button" onClick={Login} >Login</button></div>
+                   <div className="text-center mt-3">
+                           <i  className="fas  fa-user p-1"></i>
+                           <input type="text" placeholder="age" onChange={(e) => setage(e.target.value)}/>
+                   </div><br/>
+                   <div className="text-center mt-3">
+                           <i  className="fas  fa-user p-1"></i>
+                           <input type="text" placeholder="city" onChange={(e) => setcity(e.target.value)} />
+                   </div><br/>
+
+                   <div className="text-center">
+                           <i className="fas fa-key p-1"></i>
+                           <input type="text" placeholder="email" onChange={(e) => setemail(e.target.value)}/>
+                   </div><br/>
+                   <div className="text-center mt-3">
+                           <i  className="fas  fa-user p-1"></i>
+                           <input type="password" placeholder="password" onChange={(e) => setpassword(e.target.value)}/>
+                   </div><br/>
+            
+                   <div className="text-center" ><button type="button" onClick={registerUser}>Register</button></div>
                    <h5>Don't have an account? <Link style={{color:'rgb(213, 224, 219)'}} to="/register">Sign up</Link></h5>
              </form>
   
@@ -90,6 +117,6 @@ export default function Login() {
       </div>
   </div>
 
-  
+
     )
 }

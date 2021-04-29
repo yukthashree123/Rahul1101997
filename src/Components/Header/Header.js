@@ -1,39 +1,35 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import { Link } from 'react-router-dom';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
+import './Header.css';
+import {Link} from 'react-router-dom';
 
 export default function Header() {
-  const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" className="d-lg-none" color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Welcome To Foodie
-          </Typography>
-          <Link to="/">Home</Link>
-         <Button color="inherit" data-bs-toggle="modal" data-bs-target="#exampleModal" >Login</Button>    
-        </Toolbar>
-      </AppBar>
+    <nav class="navbar navbar-expand-lg bg-header">
+    <div class="container-fluid">
+      <a class="navbar-brand text-dark fw-bold" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item  fw-bold">
+          <Link to="/login" class="nav-link text-dark  active" >Home</Link>
+          </li>
+         
+        </ul>
+        <ul class="navbar-nav  mb-2 mb-lg-0 float-end">
+        <li class="nav-item fw-bold">
+            <Link to="/register" class="nav-link text-dark ">Register</Link>
+          </li>
+        <li class="nav-item fw-bold">
+            <Link to="/login" class="nav-link text-dark ">Login</Link>
+          </li>
+        </ul>
+        
+      </div>
     </div>
+  </nav>
+    
   );
 }

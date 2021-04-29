@@ -1,0 +1,107 @@
+body {
+  
+}
+
+.container {
+    height: 100vh
+}
+
+.card {
+    width: 100%;
+    min-height: 700px;
+    background-color: #70e1f5;
+    background-image: linear-gradient(315deg, #ffd194 0%,#70e1f5 74%);
+    border-radius: 1%;
+}
+
+.form {
+    padding: 20px
+}
+
+.form-control {
+    height: 50px;
+    background-color: #eee
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #f50057;
+    outline: 0;
+    box-shadow: none;
+    background-color: #eee
+}
+
+.inputbox {
+    margin-bottom: 15px
+}
+
+.loginbox{
+   
+    color: #fff;
+    width: 100%;
+    margin: auto;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+.loginpage h1{
+    color: rgb(194, 206, 202);
+    text-align: center;
+    margin-top: 3%;
+    font-size:100px;
+     font-family: 'Montserrat', sans-serif;;
+    
+}
+.formColor
+{
+    background-color: #E0EAFC;
+    background-image: linear-gradient(315deg, #E0EAFC 0%, #CFDEF3 74%);
+}
+
+/* .loginpage h2{
+    text-align: center;
+    margin-top: 10%;
+    font-weight:800;
+    color:rgb(213, 224, 219);
+    font-family: 'Montserrat', sans-serif;} */
+
+.loginpage h5{
+    font-family: 'Montserrat', sans-serif;
+    color:rgb(213, 224, 219) ;
+    margin-left: 10%; 
+}
+
+
+/* .avathar{
+    color:rgb(219, 214, 214);
+    position: absolute;
+    top: 4px;
+    left: 25%;} */
+   
+.txtbox input, button{
+    width:60%;
+    height: 40px;
+    margin: auto;
+    border: none;
+    box-sizing: border-box;
+    margin-bottom: 40px;
+    font-size: 20px;
+    color:#333;
+   
+}
+.txtbox button{
+    background-color: #3eaaad;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+.txtbox i{
+    margin-left: 6%;
+}
+.txtbox input:hover{
+    box-shadow: 2px 2px 5px #555;
+    background-color: #ddd;
+    outline: none;
+}
+.txtbox button:hover{
+    box-shadow: 5px 5px 10px #555;
+}
