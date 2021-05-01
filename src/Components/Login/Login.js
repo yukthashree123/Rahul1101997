@@ -1,6 +1,5 @@
 import React,{useState} from 'react'
-
-import './Login.css';
+import '../Login/Login.css';
 import authentication from '../Service/authentication';
 import {Link,useHistory} from 'react-router-dom';
 export default function Login() {
@@ -26,70 +25,47 @@ export default function Login() {
      }
      localStorage.setItem('token', data.access_token);
      await authentication.Login();
-    history.push('/');
+    
+     history.push('/');
   }
 
     return (
-      <div class="container d-flex justify-content-center align-items-center">
-      <div class="card">
-          <div class="row">
-              <div class="col-md-6 formColor " >
-         {/* <h1> Welcome to Foodie</h1> */}
-         
-       <div className="loginbox">
-       {/* <i class="fas avathar fa-user-circle fa-3x"></i> */}
-           <h2 class="text-center text-dark mt-5 p-2">Login</h2>
-         <div className="txtbox">
-             <form>
-                   <div className="text-center mt-3">
-                           <i  className="fas  fa-user p-1"></i>
-                           <input type="text" placeholder="username" onChange={(e) => setEmail(e.target.value)}/>
-                   </div><br/>
-                   <div className="text-center">
-                           <i className="fas fa-key p-1"></i>
-                           <input type="password" placeholder="password" onChange={(e) => setPassword(e.target.value)}/>
-                   </div><br/>
-                   <div className="text-center"><button type="button" onClick={Login} >Login</button></div>
-                   <h5>Don't have an account? <Link style={{color:'rgb(213, 224, 219)'}} to="/register">Sign up</Link></h5>
-             </form>
-  
-         </div>
-       </div>
-  
-  
-        </div>
-              <div class="col-md-6">
-              <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <div class="container d-flex align-items-center justify-content-center" style={{minHeight:"800px"}}>
+            <div class="card main m-5">
+                    <div class="row" style={{minHeight:"600px"}}>
+                        <div class=" col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                               
+                        <img class="imgLogin" src="images/signup1.jpg" alt="Paris"  width="100%" height="100%"/>       
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 d-flex  justify-content-center align-items-center">
+                                <form class="text-center">
+                                    <h2 className="my-4 header">Login</h2>
+                                    <div class="form-group">
+                                        <i class="fas fa-envelope fa-lg"></i>
+                                        <input class="myInput text-center"  type="text"   placeholder="Email" onChange={(e) => setEmail(e.target.value)} required/> 
+                                    </div>
+        
+                                    <div class="form-group">
+                                        <i class="fas fa-lock fa-lg"></i>
+                                        <input class="myInput text-center" type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} required/> 
+                                    </div>
+                        
+                                    <button className="butt text-center " type="button" onClick={Login}>Login</button>
+                                    <p className="text-center my-4 mb-5">Don't have an account?<Link to="/register" className="px-1">Register</Link> </p>
+                                </form>
+                            </div>
+                        </div> 
                     </div>
-                    <div class="carousel-inner">
-                      <div class="carousel-item active">
-                        <img src="images/carousel1.jpg" class="d-block w-100" alt="..." />
-                      </div>
-                      <div class="carousel-item">
-                        <img src="images/carousel5.jpg" class="d-block w-100" alt="..." /> 
-                      </div>
-                      <div class="carousel-item">
-                        <img src="images/carousel4.jpg" class="d-block w-100" alt="..." />
-                      </div>
-                    </div>
-                    <button class="carousel-control-prev " type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                      <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
-                      <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                      <span class="carousel-control-next-icon  bg-dark" aria-hidden="true"></span>
-                      <span class="visually-hidden">Next</span>
-                    </button>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
+                </div>
+       
+           
+  
 
   
     )
 }
+
+
+
+
+

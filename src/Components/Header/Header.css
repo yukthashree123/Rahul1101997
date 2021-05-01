@@ -1,6 +1,5 @@
 .bg-header
 {
-    background-color: #f9c5d1;
-    background-image: linear-gradient(315deg, #f9c5d1 0%, #9795ef 74%);
-    
+    background: rgb(28,185,178);
+    background: linear-gradient(90deg, rgba(28,185,178,1) 0%, rgba(44,199,192,1) 39%, rgba(166,224,218,1) 100%);
 }

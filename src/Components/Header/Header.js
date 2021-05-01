@@ -14,9 +14,13 @@ export default function Header() {
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item  fw-bold">
-          <Link to="/login" class="nav-link text-dark  active" >Home</Link>
+          <Link to="/" class="nav-link text-dark  active" >Home</Link>
           </li>
-         
+
+          <li class="nav-item  fw-bold">
+          <Link to="/favrouite" class="nav-link text-dark  active" >Favrouite</Link>
+          </li>
+        
         </ul>
         <ul class="navbar-nav  mb-2 mb-lg-0 float-end">
         <li class="nav-item fw-bold">

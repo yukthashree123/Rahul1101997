@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import '../Login/Login.css';
+import "../Register/Register.css";
 import {Link} from 'react-router-dom';
 export default function Register() {
 
@@ -10,9 +10,14 @@ export default function Register() {
     const [email, setemail] = useState('');
     const [password, setpassword] = useState('');
 
-    console.log(firstname+lastname+city+age+email+password)
+   // console.log(firstname+lastname+city+age+email+password)
 
     function registerUser() {
+      if(password.length<6)
+      {
+        alert("Password length sholud be greater then 6 character")
+      }
+      else{
         fetch(`http://localhost:9000/auth/register`,{
         method:'POST',
         headers: {
@@ -32,91 +37,66 @@ export default function Register() {
        if(data.status===200)
        {
            alert(data.message);
+
        }else if(data.status===409)
        {
         alert(data.message);
        }
    })   
+      }
+        
     }
     return (
-        <div class="container d-flex justify-content-center align-items-center">
-      <div class="card">
-          <div class="row">
-              <div class="col-md-6 formColor " >
-         {/* <h1> Welcome to Foodie</h1> */}
-         
-       <div className="loginbox">
-       {/* <i class="fas avathar fa-user-circle fa-3x"></i> */}
-           <h2 class="text-center text-dark mt-5 p-2">Register</h2>
-         <div className="txtbox">
-             <form>
-                   <div className="text-center mt-3">
-                           <i  className="fas  fa-user p-1"></i>
-                           <input type="text" placeholder="firstname" onChange={(e) => setfirstname(e.target.value)} />
-                   </div><br/>
-                   <div className="text-center">
-                           <i className="fas fa-key p-1"></i>
-                           <input type="text" placeholder="lastname" onChange={(e) => setlastname(e.target.value)} />
-                   </div><br/>
-                   <div className="text-center mt-3">
-                           <i  className="fas  fa-user p-1"></i>
-                           <input type="text" placeholder="age" onChange={(e) => setage(e.target.value)}/>
-                   </div><br/>
-                   <div className="text-center mt-3">
-                           <i  className="fas  fa-user p-1"></i>
-                           <input type="text" placeholder="city" onChange={(e) => setcity(e.target.value)} />
-                   </div><br/>
+          <div class="container d-flex align-items-center justify-content-center align-center my-auto " style={{minHeight:"800px"}}>
+            <div class="card main m-5" >
+                    <div class="row" style={{minHeight:"600px"}}>
+                        <div class=" col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                               
+                           <img src="images/signup1.jpg" alt="Paris" class="center" width="100%" height="100%"/>       
+                                
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 d-flex  justify-content-center align-items-center">
+                            <div class="d-flex justify-content-center align-self-center"> 
+                                <form class="myFormLogin text-center">
+                                    <h2 className="my-4 header">Create New Account</h2>
+                                    <div class="form-group">
+                              <i class="fas fa-user fa-lg"></i>
+                              <input class="myInput text-center" type="text" placeholder="Firstname" onChange={(e) => setfirstname(e.target.value)} required/> 
+                          </div>
 
-                   <div className="text-center">
-                           <i className="fas fa-key p-1"></i>
-                           <input type="text" placeholder="email" onChange={(e) => setemail(e.target.value)}/>
-                   </div><br/>
-                   <div className="text-center mt-3">
-                           <i  className="fas  fa-user p-1"></i>
-                           <input type="password" placeholder="password" onChange={(e) => setpassword(e.target.value)}/>
-                   </div><br/>
-            
-                   <div className="text-center" ><button type="button" onClick={registerUser}>Register</button></div>
-                   <h5>Don't have an account? <Link style={{color:'rgb(213, 224, 219)'}} to="/register">Sign up</Link></h5>
-             </form>
-  
-         </div>
-       </div>
-  
-  
-        </div>
-              <div class="col-md-6">
-              <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    </div>
-                    <div class="carousel-inner">
-                      <div class="carousel-item active">
-                        <img src="images/carousel1.jpg" class="d-block w-100" alt="..." />
-                      </div>
-                      <div class="carousel-item">
-                        <img src="images/carousel5.jpg" class="d-block w-100" alt="..." /> 
-                      </div>
-                      <div class="carousel-item">
-                        <img src="images/carousel4.jpg" class="d-block w-100" alt="..." />
-                      </div>
-                    </div>
-                    <button class="carousel-control-prev " type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                      <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
-                      <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                      <span class="carousel-control-next-icon  bg-dark" aria-hidden="true"></span>
-                      <span class="visually-hidden">Next</span>
-                    </button>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
+                          <div class="form-group">
+                              <i class="fas fa-user fa-lg"></i>
+                              <input class="myInput text-center" type="text" placeholder="Lastname" onChange={(e) => setlastname(e.target.value)} required/> 
+                          </div>
 
+                          <div class="form-group">
+                              <i class="fas fa-birthday-cake fa-lg"></i>
+                              <input class="myInput text-center" type="text" placeholder="Age" onChange={(e) => setage(e.target.value)} /> 
+                          </div>
+
+                          <div class="form-group">
+                              <i class="fas fa-city"></i>
+                              <input class="myInput text-center" type="text"  placeholder="City" onChange={(e) => setcity(e.target.value)}/> 
+                          </div>
+                                    <div class="form-group">
+                                        <i class="fas fa-envelope fa-lg"></i>
+                                        <input class="myInput text-center"  type="text"   placeholder="Email" onChange={(e) => setemail(e.target.value)} required/> 
+                                    </div>
+        
+                                    <div class="form-group">
+                                        <i class="fas fa-lock fa-lg"></i>
+                                        <input class="myInput text-center" type="password" placeholder="Password" onChange={(e) => setpassword(e.target.value)} required/> 
+                                    </div>
+                        
+                                    <button className="butt text-center" type="button" onClick={registerUser}>CREATE ACCOUNT</button>
+                                    <p className="text-center my-4 mb-5">Already have an account?<Link to="/login" className="px-1">Login</Link> </p>
+                                </form>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
 
     )
 }
+ 

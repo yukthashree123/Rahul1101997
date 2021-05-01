@@ -7,7 +7,11 @@ const authentication = {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         }).then(res => res.json())
-            .then(data=>(this.isLoggedIn = data.isAuthenticated ));
+            .then(data=>{this.isLoggedIn = data.isAuthenticated ;
+                console.log(data);
+            });
+
     }
+    
 }
 export default authentication;
