@@ -13,7 +13,7 @@ export default function FavrouiteRes() {
             .then(res => res.json())
             .then(data => {
                 setFav(data);
-                console.log(data);
+               // console.log(data);
             });
     }, []);
 

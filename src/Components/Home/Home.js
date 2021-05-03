@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { Link } from 'react-router-dom';
+
 import HomeCard from '../HomeCard/HomeCard';
 export default function Home() {
    // const [data, setData] = useState([]);
@@ -8,7 +8,9 @@ export default function Home() {
     const [longitude, setlongitude] = useState('');
     const [loading, setloading] = useState(true);
 
-    useEffect(async() => {
+    useEffect(() => {
+        async function fetchdata()
+        {
        setloading(true);
         getLocation();
          await fetch(`https://developers.zomato.com/api/v2.1/geocode?lat=${latitude}&lon=${longitude}`,{
@@ -18,12 +20,14 @@ export default function Home() {
             }
         })
           .then(res=>res.json())
-          .then(data=>{console.log(data.nearby_restaurants);
+          .then(data=>{//console.log(data.nearby_restaurants);
               setData(data.nearby_restaurants);
              setloading(false);
-             console.log(data);
+             //console.log(data);
           });  
-    },[latitude,longitude]);
+    }
+    fetchdata();
+},[latitude,longitude]);
 
   
     function getLocation()
@@ -37,7 +41,7 @@ export default function Home() {
           }
     }
 
-   console.log(latitude+" "+longitude);
+   //console.log(latitude+" "+longitude);
 
       //console.log(data[4].restaurant.name);
     return (
@@ -48,12 +52,9 @@ export default function Home() {
             <div className="col-md-10 p-2">
                 <h2 className="text-center text-primary" id="h2id">Welcome To Foodie</h2>
             </div>
-            <div className="col-md-1 p-2 mt-2">
-                <Link to="/logout" id="logoutBtn" className="text-danger">Logout <i className="fas fa-sign-out-alt"></i></Link>
-            </div>
         </div>
         <div className="row">
-            {loading?<div><img src="images/loading1.gif" width="100%"/></div>:data.map(item=><HomeCard key={item.restaurant.id} id={item.restaurant.id} resName={item.restaurant.name} image={item.restaurant.featured_image} cuisines={item.restaurant.cuisines} address={item.restaurant.location.address} average={item.restaurant.average_cost_for_two} rating={item.restaurant.user_rating.aggregate_rating}/>)}
+            {loading?<div><img src="images/loading1.gif" alt="not found" width="100%"/></div>:data.map(item=><HomeCard key={item.restaurant.id} id={item.restaurant.id} resName={item.restaurant.name} image={item.restaurant.featured_image} cuisines={item.restaurant.cuisines} address={item.restaurant.location.address} average={item.restaurant.average_cost_for_two} rating={item.restaurant.user_rating.aggregate_rating}/>)}
             </div>
     </div>
     )

@@ -1,14 +1,15 @@
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import '../Login/Login.css';
-import authentication from '../Service/authentication';
+import authentication from '../../Service/authentication';
 import {Link,useHistory} from 'react-router-dom';
+import AppContext from '../../AppContext';
 export default function Login() {
 
   let history=useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
- async function Login() {
+    const [state,dispatch] = useContext(AppContext);
+ async function Login(props) {
    const res = await fetch('http://localhost:9000/auth/login', {
          method: 'POST',
          headers: {
@@ -17,7 +18,7 @@ export default function Login() {
          body: JSON.stringify({ email, password })
      });
      const data = await res.json();
-     console.log(data);
+    // console.log(data);
      
      if(data.status===401)
      {
@@ -25,9 +26,11 @@ export default function Login() {
      }
      localStorage.setItem('token', data.access_token);
      await authentication.Login();
-    
+     dispatch({ type: 'PushEmail', value: email })
      history.push('/');
   }
+
+  
 
     return (
         <div class="container d-flex align-items-center justify-content-center" style={{minHeight:"800px"}}>
@@ -41,12 +44,12 @@ export default function Login() {
                                 <form class="text-center">
                                     <h2 className="my-4 header">Login</h2>
                                     <div class="form-group">
-                                        <i class="fas fa-envelope fa-lg"></i>
+                                        <i class="fas fa-envelope"></i>
                                         <input class="myInput text-center"  type="text"   placeholder="Email" onChange={(e) => setEmail(e.target.value)} required/> 
                                     </div>
         
                                     <div class="form-group">
-                                        <i class="fas fa-lock fa-lg"></i>
+                                        <i class="fas fa-lock"></i>
                                         <input class="myInput text-center" type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} required/> 
                                     </div>
                         

@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState} from 'react';
 import "../Register/Register.css";
 import {Link} from 'react-router-dom';
 export default function Register() {
@@ -52,7 +52,7 @@ export default function Register() {
                     <div class="row" style={{minHeight:"600px"}}>
                         <div class=" col-lg-5 col-md-5 col-sm-12 col-xs-12">
                                
-                           <img src="images/signup1.jpg" alt="Paris" class="center" width="100%" height="100%"/>       
+                           <img src="images/signup1.jpg" alt="Paris" class="center imgLogin" width="100%" height="100%"/>       
                                 
                         </div>
                         <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 d-flex  justify-content-center align-items-center">
@@ -79,7 +79,7 @@ export default function Register() {
                               <input class="myInput text-center" type="text"  placeholder="City" onChange={(e) => setcity(e.target.value)}/> 
                           </div>
                                     <div class="form-group">
-                                        <i class="fas fa-envelope fa-lg"></i>
+                                        <i class="fas fa-envelope"></i>
                                         <input class="myInput text-center"  type="text"   placeholder="Email" onChange={(e) => setemail(e.target.value)} required/> 
                                     </div>
         
