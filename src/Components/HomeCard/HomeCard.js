@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     transform: 'rotate(180deg)',
   },
   avatar: {
-    backgroundColor:  'rgb(22,185,178)',
+    backgroundColor: 'rgb(22,185,178)',
     fontWeight:600
   },
 
@@ -57,7 +57,6 @@ export default function HomeCard(props) {
   const classes = useStyles();
   let history=useHistory();
   const [isClick, setClick] = useState(false);
-  const [fav, setFav] = useState([]);
   const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -73,11 +72,10 @@ export default function HomeCard(props) {
     // console.log(data);
 
      function  addFav(id) {
-      setData(data);
+     // setData(data);
           let favstatus= data.find(f => {
-                return f.Rid === id;
+                return (f.Rid === id && f.Email===state);
                });
-
               console.log(favstatus);
         //  console.log("Rahul");
            if(authentication.isLoggedIn)
@@ -107,7 +105,7 @@ export default function HomeCard(props) {
             }
             else
             {
-              alert("item already exist");
+              alert("Resturant already added to favrouite");
             }
           }
         else
@@ -118,7 +116,7 @@ export default function HomeCard(props) {
   }
     return (
 
-     <div className="col-md-4 col-sm-12 col-xs-12 mb-4 cardHome">
+     <div className="col-md-4 col-sm-12 col-xs-12  cardHome">
             <Card className={classes.root}>
             <CardHeader 
               avatar={

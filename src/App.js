@@ -8,7 +8,7 @@ import {BrowserRouter as Router,Redirect,Route,Switch } from 'react-router-dom';
 import FavrouiteRes from './Components/FavrouiteRes/FavrouiteRes';
 import Restaurant from './Components/Restaurant/Restaurant';
 import Logout from './Components/Logout/Logout';
-import { useReducer } from 'react';
+import { useReducer,useState } from 'react';
 import  reducer,{Email} from './Reducer/Reducer';
 import AppContext from './AppContext';
 
@@ -16,16 +16,20 @@ function App() {
 
     const [state, dispatch] = useReducer(reducer, Email);
 
+    const [isLoggedIn, setIsLoggedIn] = useState(authentication.isLoggedInfun());
+  function loginHandlerFunction(status) {
+    setIsLoggedIn(status);
+}
+let check=authentication.isLoggedInfun();
   return (
       <Router>
-         <Header/>
+         <Header loginStatus={isLoggedIn}/>
           <Switch>
           <AppContext.Provider value={[state, dispatch]}>
           <Route exact path="/" component={Home}/>
-            <Route exact path="/login" component={() => <Login/>} />
-            <Route exact path="/favrouite" component={() => authentication.isLoggedIn ? <FavrouiteRes /> : <Redirect to="/login" />}/>
-          
-            <Route exact path="/logout" component={Logout} />
+            <Route exact path="/favrouite" component={() => check? <FavrouiteRes /> : <Redirect to="/login" />}/>
+            <Route exact path="/login" component={()=> <Login loginHandler={loginHandlerFunction}/>}/>
+            <Route exact path="/logout" component={()=> <Logout loginHandler={loginHandlerFunction}/>}/>
             <Route exact path="/register" component={Register} />
             <Route exact path="/resdetail/:id" component={Restaurant} />
            

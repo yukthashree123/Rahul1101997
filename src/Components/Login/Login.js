@@ -3,13 +3,15 @@ import '../Login/Login.css';
 import authentication from '../../Service/authentication';
 import {Link,useHistory} from 'react-router-dom';
 import AppContext from '../../AppContext';
-export default function Login() {
+export default function Login(props) {
 
   let history=useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
     const [state,dispatch] = useContext(AppContext);
- async function Login(props) {
+
+
+ async function Login() {
    const res = await fetch('http://localhost:9000/auth/login', {
          method: 'POST',
          headers: {
@@ -27,7 +29,12 @@ export default function Login() {
      localStorage.setItem('token', data.access_token);
      await authentication.Login();
      dispatch({ type: 'PushEmail', value: email })
-     history.push('/');
+     if(authentication.isLoggedInfun() && data.status==200)
+     {
+        props.loginHandler(true);
+        history.push('/');
+     }
+    
   }
 
   

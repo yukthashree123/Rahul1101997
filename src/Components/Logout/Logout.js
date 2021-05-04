@@ -1,23 +1,15 @@
 import React from 'react';
-
 import { useHistory } from "react-router-dom";
-import authentication from "../../Service/authentication";
+import authentication from '../../Service/authentication';
 
-export default async function Logout(props) {
-
+export default function Logout(props) {
     let history = useHistory();
-
-   await authentication.Logout();
-   
-    history.push('/login')
-    // function setUser() {
-    //     props.getUser(username);
-    // }
-
-    // setUser();
+    authentication.Logout();
+    props.loginHandler(false);
+    history.push('/login');
     return (
         <div>
-           
+            
         </div>
     )
 }
